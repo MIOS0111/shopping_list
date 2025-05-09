@@ -1,0 +1,41 @@
+{% extends "base.html" %} 
+{% block content %} 
+    <div class="container mt-4">
+        <h1>Обратная связь</h1>
+        <p>Ваше мнение и предложение очень важно для нас. Пожалуйста, оставьте свой отзыв ниже:</p>
+
+        <form id="add-feedback-form" method="post" action="{% url 'add_feedback' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Имя</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Введите ваше имя" value="{{ form.name.value|default:'' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Почта</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Введите почту" value="{{ form.email.value|default:'' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Ваш отзыв</label>
+                <input type='text' class="form-control" id="content" name="content"  placeholder="Ваш отзыв" value="{{ form.content.value|default:'' }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+        <div id="feedback-response" class="mt-4"></div>
+    </div>
+{% endblock %}
+<!--
+    <script>
+        $(document).ready(function() {
+            $('#feedback-form').on('submit', function(e) {
+                e.preventDefault();
+                const name = $('#feedback-name').val();
+                const email = $('#feedback-email').val();
+                const message = $('#feedback-message').val();
+
+                // Логика обработки обратной связи (пример)
+                $('#feedback-response').html(`<div class="alert alert-success">Спасибо, ${name}! Ваш отзыв отправлен.</div>`);
+                $('#feedback-form')[0].reset();
+            });
+        });
+    </script>
+-->

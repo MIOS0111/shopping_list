@@ -1,0 +1,17 @@
+{% extends "base.html" %} 
+{% block content %} 
+<div class="container mt-4">
+<h2>Отзывы</h2>
+<ul>
+  {% for feedback in feedbacks %}
+    <li>
+      <strong>{{ feedback.name }}</strong> ({{ feedback.email }})<br>
+      {{ feedback.content }}<br>
+      <em>Опубликовано {{ feedback.created_on }}</em>
+    </li>
+  {% empty %}
+    <li>Нет отзывов</li>
+  {% endfor %}
+</ul>
+</div>
+{% endblock %}

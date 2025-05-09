@@ -1,0 +1,29 @@
+{% extends "base.html" %} 
+{% block content %} 
+    <div class="container text-center mt-4">
+        <h1>Список Моих Покупок</h1>
+        {% if user.is_authenticated %}
+            <ul id="purchases-list" class="list-group"> 
+            {% for post in post_list %}
+                <li class="list-group-item"> {{post.content}}<form method="post" action="{% url 'delete_post' post.pk %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button class="btn btn-danger btn-sm float-right remove-btn">Удалить</button>
+                </form></li>
+            {% endfor %}
+            </ul>
+        <form id="add-purchase-form" class="mt-4" method="post" action="{% url 'create_post' %}">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="purchase-name">Добавить новый товар</label>
+                    <input type="text" name="content" class="form-control" id="content" value="{{ form.title.value|default:'' }}" 
+                    placeholder="Введите название товара" required>
+                </div>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+
+    {% else %}
+        <p>Авторизуйтесь, чтобы получить доступ к содержимому</p>
+    {% endif %}
+
+    </div>
+{% endblock %}
