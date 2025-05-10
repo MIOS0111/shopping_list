@@ -1,28 +1,34 @@
 {% extends "base.html" %} 
-{% block content %} 
-    <div class="container mt-4">
-        <h1>Регистрация</h1>
-        <form method="post" id="register-form">
-            {% csrf_token %} 
-            <div class="form-group">
-                <label for="full_name">Никнейм</label>
-                <input type="text" class="form-control" name="username" id="id_username" placeholder="Введите никнейм" required>
-            </div>
-        <!---    <div class="form-group">
-                <label for="email">Почта</label>
-                <input type="email" class="form-control" id="email" placeholder="Введите почту" required>
-            </div> -->
-            <div class="form-group">
-                <label for="password">Пароль</label>
-                <input type="password" class="form-control" name="password1" id="id_password1" placeholder="Введите пароль" required>
-            </div>
-            <div class="form-group">
-                <label for="confirm_password">Подтверждение пароля</label>
-                <input type="password" class="form-control" name="password2" id="id_password2" placeholder="Подтвердите пароль" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-        </form>
+{% block content %}
 
+<div class="container mt-4">
+<h1>Регистрация</h1>
+{% for exception in exceptions %}
+<div class="text-danger">{{ exception }}</div>
+{% endfor %}
+<form method="post" id="register-form" action="{% url 'register' %}">
+    {% csrf_token %} 
+
+    <div class="form-group">
+        <label for="id_username">Никнейм</label>
+        <input type="text" class="form-control" name="username" id="id_username" placeholder="Введите никнейм" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Почта</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="Введите почту" required>
+    </div> 
+
+    <div class="form-group">
+        <label for="id_password1">Пароль</label>
+        <input type="password" class="form-control" name="password1" id="id_password1" placeholder="Введите пароль" required>
+    </div>
+
+    <div class="form-group">
+        <label for="id_password2">Подтверждение пароля</label>
+        <input type="password" class="form-control" name="password2" id="id_password2" placeholder="Подтвердите пароль" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+    </form>
         <div id="registration-feedback" class="mt-4"></div>
     </div>
 {% endblock %}

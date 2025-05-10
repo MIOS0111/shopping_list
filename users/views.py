@@ -6,7 +6,6 @@ from django.views.generic.edit import CreateView
 from django.views import generic
 from users.forms import *
 from users.models import Post
-from django.contrib.auth.decorators import user_passes_test
 
 def main_page(request):
     return render(request, "users/main_page.html")
@@ -17,9 +16,6 @@ def logout_request(request):
 
 def contacts(request):
     return render(request, "users/contacts.html")
-
-#def feedback(request):
-#    return render(request, "users/feedback.html")
 
 class SignUp(CreateView):
     form_class = UserCreationForm
@@ -62,7 +58,15 @@ def add_feedback(request): #обработка формы обратной св�
         # после добавления, можно сделать редирект или другую обработку
     return redirect('contacts')
 
-#@user_passes_test(lambda u: u.is_superuser)
-def feedback_list(request):#страница с выводом обратной связи, доступна только админу
+def feedback_list(request):#страница с выводом обратной связи
     feedbacks = Feedback_Post.objects.all().order_by('-created_on')
     return render(request, 'users/feedback_list.html', {'feedbacks': feedbacks})
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()  
+            return redirect('login')
+    exceptions = form.GetExcpForm()
+    return render(request, 'registration/signup.html', {'exceptions': exceptions})
