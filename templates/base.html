@@ -40,6 +40,12 @@
     <footer class="footer mt-5">
         <p>&copy; 2025 Мои Покупки. Все права защищены.</p>
         <a href="{% url 'feedback_list' %}" class="btn btn-link">Отзывы</a>
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button class="btn btn-danger btn-sm float-center remove-btn">Выйти</button>
+        </form>
+        {% endif %}
     </footer>
 </body>
 </html>
