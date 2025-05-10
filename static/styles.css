@@ -1,3 +1,7 @@
+.main_content {
+    margin-top: 15px; 
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -15,6 +19,7 @@ body {
 
 .navbar-brand {
     font-weight: bold;
+    margin-left: 15px;
 }
 
 h1 {
@@ -149,14 +154,54 @@ h5 {
     border-radius: 5px; /* Закругление углов рамки */
     background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для контраста */
     color: white; /* Цвет текста */
-    margin-top: -50px; /* Поднимаем футер на 50 пикселей */
+    bottom: 0; left: 0; right: 0;
+    position: fixed; 
+
 }
-
-
-/* Стили для сохранения видимости кнопок */
-@media (max-width: 576px) {
-    .navbar-expand-lg .navbar-nav .nav-link {
-        padding-left: 15px;
-        padding-right: 15px;
+.footer1 {
+    text-align: center; /* Выравнивание текста по центру */
+    padding: 0; /* Отступы внутри рамки */
+    border-radius: 5px; /* Закругление углов рамки */
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для контраста */
+    color: white; /* Цвет текста */
+    bottom: 0; left: 0; right: 0;
+}
+.step-image {
+                width: 80px;
+                height: 80px;
+            }  
+.image-row {
+                gap: 1rem;
+            }  
+        .image-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
         }
-    }
+        
+        .step-image {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .step-image:hover {
+            transform: scale(1.1);
+        }
+        
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 150px;
+            text-align: center;
+        }
+        
+        .step-text {
+            margin-top: 1rem;
+            color: rgb(0, 0, 0);
+            font-weight: 500;
+        }     

@@ -1,17 +1,50 @@
-{% extends "base.html" %} 
-{% block content %} 
-<div class="container mt-4">
-<h2>Отзывы</h2>
-<ul>
-  {% for feedback in feedbacks %}
-    <li>
-      <strong>{{ feedback.name }}</strong> ({{ feedback.email }})<br>
-      {{ feedback.content }}<br>
-      <em>Опубликовано {{ feedback.created_on }}</em>
-    </li>
-  {% empty %}
-    <li>Нет отзывов</li>
-  {% endfor %}
-</ul>
-</div>
+{% extends "base.html" %}
+{% block content %}
+<main class="container mt-5 pt-4">
+  <div class="main_content">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm mb-4">
+          <div class="card-body">
+            <h2 class="text-center mb-4"><i class="bi bi-chat-square-quote"></i> Отзывы пользователей</h2>
+            <ul>
+              {% for feedback in feedbacks %}
+              <li>
+                <strong>{{ feedback.name }}</strong> ({{ feedback.email }})<br>
+                {{ feedback.content }}<br>
+                <em>Опубликовано {{ feedback.created_on }}</em>
+              </li>
+              {% empty %}
+              <li>Нет отзывов</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+        $(document).ready(function() {
+            $('#add-feedback-form').on('submit', function(e) {
+                e.preventDefault();
+                
+                const feedback = {
+                    name: $('#name').val(),
+                    email: $('#email').val(),
+                    content: $('#content').val(),
+                    date: new Date().toISOString()
+                };
+                 
+                $('#feedback-response').html(`
+                    <div class="alert alert-success alert-dismissible fade show">
+                        Спасибо за ваш отзыв!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                `);
+                
+                $('#add-feedback-form')[0].reset();
+            });
+        });
+    </script>
+</main>
 {% endblock %}

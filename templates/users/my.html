@@ -1,29 +1,54 @@
-{% extends "base.html" %} 
-{% block content %} 
-    <div class="container text-center mt-4">
-        <h1>Список Моих Покупок</h1>
-        {% if user.is_authenticated %}
-            <ul id="purchases-list" class="list-group"> 
-            {% for post in post_list %}
-                <li class="list-group-item"> {{post.content}}<form method="post" action="{% url 'delete_post' post.pk %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button class="btn btn-danger btn-sm float-right remove-btn">Удалить</button>
-                </form></li>
-            {% endfor %}
-            </ul>
-        <form id="add-purchase-form" class="mt-4" method="post" action="{% url 'create_post' %}">
-            {% csrf_token %}
-                <div class="form-group">
-                    <label for="purchase-name">Добавить новый товар</label>
-                    <input type="text" name="content" class="form-control" id="content" value="{{ form.title.value|default:'' }}" 
-                    placeholder="Введите название товара" required>
+{% extends "base.html" %}
+{% block content %}
+<main class="container mt-5 pt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="main_content">
+                <div class="container text-center mt-4">
+                    <h1>Список Моих Покупок</h1>
+                    {% if user.is_authenticated %}
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <ul id="purchases-list" class="list-group list-group-flush">
+                                {% for post in post_list %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{post.content}}
+                                    <form method="post" action="{% url 'delete_post' post.pk %}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm btn-outline-danger remove-btn">
+                                            <i class="bi bi-trash"></i> Удалить
+                                        </button>
+                                    </form>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <form id="add-purchase-form" method="post" action="{% url 'create_post' %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="purchase-name" class="form-label">Добавить новый товар</label>
+                                    <input type="text" class="form-control" id="content" name="content"
+                                        placeholder="Введите название товара" value="{{ form.title.value|default:'' }}"
+                                        required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="bi bi-plus-circle"></i> Добавить
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    {% else %}
+                    <p>Авторизуйтесь, чтобы получить доступ к содержимому</p>
+                    {% endif %}
+
                 </div>
-            <button type="submit" class="btn btn-primary">Добавить</button>
-        </form>
-
-    {% else %}
-        <p>Авторизуйтесь, чтобы получить доступ к содержимому</p>
-    {% endif %}
-
+            </div>
+        </div>
     </div>
+</main>
 {% endblock %}

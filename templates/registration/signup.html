@@ -1,54 +1,73 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% block content %}
 
-<div class="container mt-4">
-<h1>Регистрация</h1>
-{% for exception in exceptions %}
-<div class="text-danger">{{ exception }}</div>
-{% endfor %}
-<form method="post" id="register-form" action="{% url 'register' %}">
-    {% csrf_token %} 
+<main class="container mt-5 pt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="main_content">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4"><i class="bi bi-person-plus"></i> Регистрация</h2>
+                        {% for exception in exceptions %}
+                        <div class="text-danger">{{ exception }}</div>
+                        {% endfor %}
+                        <form method="post" id="register-form" action="{% url 'register' %}">
+                            {% csrf_token %}
 
-    <div class="form-group">
-        <label for="id_username">Никнейм</label>
-        <input type="text" class="form-control" name="username" id="id_username" placeholder="Введите никнейм" required>
-    </div>
-    <div class="form-group">
-        <label for="email">Почта</label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="Введите почту" required>
-    </div> 
+                            <div class="mb-3">
+                                <label class="form-label for=" id_username">Никнейм</label>
+                                <input type="text" class="form-control" name="username" id="id_username"
+                                    placeholder="Введите никнейм" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label for=" email">Почта</label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    placeholder="Введите почту" required>
+                            </div>
 
-    <div class="form-group">
-        <label for="id_password1">Пароль</label>
-        <input type="password" class="form-control" name="password1" id="id_password1" placeholder="Введите пароль" required>
-    </div>
+                            <div class="mb-3">
+                                <label class="form-label for=" id_password1">Пароль</label>
+                                <input type="password" class="form-control" name="password1" id="id_password1"
+                                    placeholder="Введите пароль" required>
+                            </div>
 
-    <div class="form-group">
-        <label for="id_password2">Подтверждение пароля</label>
-        <input type="password" class="form-control" name="password2" id="id_password2" placeholder="Подтвердите пароль" required>
+                            <div class="mb-3">
+                                <label class="form-label for=" id_password2">Подтверждение пароля</label>
+                                <input type="password" class="form-control" name="password2" id="id_password2"
+                                    placeholder="Подтвердите пароль" required>
+                            </div>
+                            <button type="submit" onclick="validatePassword"
+                                class="btn btn-primary w-100">Зарегистрироваться</button>
+                        </form>
+                        <div id="registration-feedback" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-    </form>
-        <div id="registration-feedback" class="mt-4"></div>
-    </div>
-{% endblock %}
-    <!--    <script>
-        $(document).ready(function() {
-            $('#register-form').on('submit', function(e) {
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#register-form').on('submit', function (e) {
+            const fullName = $('#id_username').val();
+            const email = $('#email').val();
+            const password = $('#id_password1').val();
+            const confirmPassword = $('#id_password2').val();
+
+            if (password !== confirmPassword) {
                 e.preventDefault();
-                const fullName = $('#full_name').val();
-                const email = $('#email').val();
-                const password = $('#password').val();
-                const confirmPassword = $('#confirm_password').val();
-
-                // Пример базовой валидации
-                if (password !== confirmPassword) {
-                    $('#registration-feedback').html(`<div class="alert alert-danger">Пароли не совпадают!</div>`);
-                    return;
-                }
-
-                // Логика успешной регистрации
-                $('#registration-feedback').html(`<div class="alert alert-success">Пользователь ${fullName} успешно зарегистрирован!</div>`);
-                $('#register-form')[0].reset();
-            });
-        });    -->
+                $('#registration-feedback').html(`
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            Пароли не совпадают!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    `);
+                return;
+            }
+            $('#register-form')[0].reset();
+        });
+    });
+</script>
+{% endblock %}

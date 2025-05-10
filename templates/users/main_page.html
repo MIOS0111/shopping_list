@@ -1,12 +1,202 @@
     {% extends "base.html" %} 
     {% block content %} 
     {% load static %}
-    <div class="container mt-4">
-    <h1>Преимущества сервиса Мои Покупки</h1>
-    <strong>Мои Покупки</strong> - это простой и умный способ составить список покупок. Приложение 
-    позволяет быстро добавлять продукты и планировать свои покупки. Отличный выбор для тех, кто ценит простоту и функциональность.
-    Интуитивный интерфейс помогает сосредоточиться на главном. Ваш идеальный помощник для походов в магазин!
-    Так же делитесь своим мнением о сервисе с другими пользователями и планируйте вместе с нами!
-    <img src="{% static 'foto2.webp' %}" style="max-width: 100%; height: auto; border-radius: 5px;" alt="Изображение сервиса Мои Покупки">
+    <div>
+    <style>
+        /* Стили для лендинга */
+        .landing-header {
+            background: #004494;
+            color: white;
+            padding: 100px 0 120px;
+            text-align: center;
+            margin-top: 56px; /* Учитываем высоту навбара */
+        }
+        
+        .landing-title {
+            font-size: 2.5rem;
+            margin-top: 0px;
+        }
+        
+        .landing-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            color: black;
+        }
+        
+        .landing-btn {
+            display: inline-block;
+            background: #3c1f91;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .landing-btn:hover {
+            background: #3c1f91;
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .features-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            padding: 30px 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+        
+        .screenshot-section {
+            background: #f9f9f9;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .screenshot-img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-section {
+            padding: 80px 0;
+            text-align: center;
+            background: #004494;
+            color: white;
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: black;
+        }
+        
+        .platforms-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .platform-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .platform-icon {
+            font-size: 2.5rem;
+        }
+        
+        .footer-cta {
+            margin-bottom: 20px;
+        }
+    </style>
+    <!-- Лендинг страница -->
+    <header class="landing-header">
+        <div class="container">
+            <h1 class="landing-title">Упростите покупки!</h1>
+            <p class="landing-subtitle">Создавайте списки за секунды. Бесплатно. Доступно на телефоне и компьютере.</p>
+            <a href="{% url 'my' %}" class="landing-btn">Начать использовать</a>
+        </div>
+    </header>
+    
+    <!-- Преимущества -->
+    <section class="features-section">
+        <div class="container">
+            <h2>Почему Мои Покупки?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Быстрое добавление</h3>
+                    <p>Добавляйте товары в один клик или голосом</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📲</div>
+                    <h3>Доступ везде</h3>
+                    <p>Работает на телефоне, планшете и компьютере</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛒</div>
+                    <h3>Автоматическая сортировка</h3>
+                    <p>Товары автоматически группируются по категориям</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👪</div>
+                    <h3>Совместные списки</h3>
+                    <p>Делитесь списками с семьей и друзьями</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Скриншот интерфейса -->
+    <section class="screenshot-section">
+         <div class="container">
+            <h2>ПРОСТОТА ИСПОЛЬЗОВАНИЯ</h2>
+            <h2>Собери корзину в один клик</h2>
+            <div class="image-row">
+                <div class="step-item">
+                    <img src={% static "12412.png" %} alt="Выбор товара" class="step-image">
+                </div>
+                <div class="step-item">
+                    <img src={% static "4124234.png" %} alt="Добавление в корзину" class="step-image">
+                </div>
+                <div class="step-item">
+                    <img src={% static "1423412341.png" %} alt="Оформление заказа" class="step-image">
+                </div>
+        </div>
+    </div>
+    </section>
+    
+    <!-- Отзыв -->
+    <section class="testimonial-section">
+        <div class="container">
+            <blockquote class="testimonial-quote">
+                "Раньше теряла списки в заметках, теперь всё в одном месте!"
+            </blockquote>
+            <p class="testimonial-quote">Анна, 28 лет</p>
+        </div>
+    </section>
+    
+    <!-- Платформы -->
+    <section class="platforms-section">
+        <div class="container">
+            <h2>Доступно на всех устройствах</h2>
+            <div class="platform-icons">
+                <div class="platform-icon">📱</div>
+                <div class="platform-icon">💻</div>
+            </div>
+            <p>Работает в браузере! Не требует установки.</p>
+        </div>
+    </section>
     </div>
     {% endblock %}
