@@ -1,5 +1,6 @@
 .main_content {
-    margin-top: 15px; 
+    margin-top: 15px;
+    min-height: 70vh; 
 }
 
 body {
@@ -154,8 +155,12 @@ h5 {
     border-radius: 5px; /* Закругление углов рамки */
     background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для контраста */
     color: white; /* Цвет текста */
-    bottom: 0; left: 0; right: 0;
-    position: fixed; 
+    /*justify-content: center; */
+
+    margin-top: auto; 
+    /*bottom: 0; left: 0; right: 0; */
+    margin:auto;
+	clear:both;
 
 }
 .footer1 {
